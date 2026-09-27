@@ -7,11 +7,12 @@ const { UPLOAD_DIR } = require("./middleware/upload");
 
 const app = express();
 
-const allowedOrigins = [process.env.CLIENT_ORIGIN, process.env.ADMIN_ORIGIN].filter(Boolean);
-
+// Reflects whatever Origin the request came from (works with any domain,
+// including credentialed requests, since Access-Control-Allow-Origin can't
+// be a literal "*" when credentials are involved).
 app.use(
   cors({
-    origin: allowedOrigins.length ? allowedOrigins : true,
+    origin: true,
     credentials: true
   })
 );
